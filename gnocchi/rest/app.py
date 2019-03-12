@@ -65,8 +65,9 @@ class GnocchiHook(pecan.hooks.PecanHook):
     @staticmethod
     def after(state):
         if state.response.status_code not in [200, 201, 202]:
-            LOG.debug("Request:\n%s\n", state.request)
-            LOG.debug("Response:\n%s\n", state.response)
+            LOG.debug("Request:\n{}\n".format(state.request))
+            LOG.debug("Response:\n{}\n".format(state.response.text))
+
 
         # NOTE(sileht): uwsgi expects the application to consume the wsgi.input
         # fd. Otherwise the connection with the application freeze. In our
